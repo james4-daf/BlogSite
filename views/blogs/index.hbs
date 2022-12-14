@@ -5,7 +5,12 @@
   {{#each blogs}}
     <div class="center">
 
-      <h3>{{title}}</h3>
+      <h3>
+        <a href="blog/{{_id}}">
+
+          {{title}}
+        </a>
+      </h3>
       <h5>{{problemStatement}}</h5>
     </div>
 
