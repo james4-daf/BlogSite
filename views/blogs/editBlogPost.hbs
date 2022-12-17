@@ -1,0 +1,53 @@
+<h2>Edit Blog</h2>
+
+<form action="/blog/{{blog._id}}/edit" method="post">
+  <div class="mb-3">
+
+    <input placeholder="title" id="title" name="title" value="{{blog.title}}" />
+  </div>
+  <div class="mb-3">
+    <input
+      placeholder="problemStatement"
+      id="problemStatement"
+      name="problemStatement"
+      value="{{blog.problemStatement}}"
+    />
+  </div>
+  <div class="mb-3">
+    <input
+      placeholder="solution"
+      id="solution"
+      name="solution"
+      value="{{blog.solution}}"
+    />
+  </div>
+
+  <div class="mb-3">
+    <input
+      placeholder="mdnDocs"
+      id="mdnDocs"
+      name="mdnDocs"
+      value="{{blog.mdnDocs}}"
+    />
+  </div>
+
+  <fieldset>
+    <legend>Choose your blogs's tags:</legend>
+
+    <div>
+      <input type="checkbox" id="Arrays" name="tags" value="Arrays" />
+      <label for="Arrays">Arrays</label>
+    </div>
+
+    <div>
+      <input type="checkbox" id="Strings" name="tags" value="Strings" />
+      <label for="Strings">Strings</label>
+    </div>
+    <div>
+      <input type="checkbox" id="Functions" name="tags" value="Functions" />
+      <label for="Functions">Functions</label>
+    </div>
+  </fieldset>
+
+  <button type="submit">Submit</button>
+</form>

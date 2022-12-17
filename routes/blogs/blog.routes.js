@@ -56,6 +56,48 @@ router.post("/blogs/create", (req, res, next) => {
     });
 });
 
+router.get("/blog/:id/edit", (req, res, next) => {
+  const { id } = req.params;
+  BlogModel.findById(id)
+    .then((blog) => {
+      res.render("blogs/editBlogPost.hbs", { blog });
+    })
+    .catch((err) => {
+      console.log("blog edit failed", err);
+    });
+});
+
+router.post("/blog/:id/edit", (req, res, next) => {
+  const { title, problemStatement, solution, mdnDocs, tags } = req.body;
+  const { id } = req.params;
+  BlogModel.findByIdAndUpdate(id, {
+    title,
+    problemStatement,
+    solution,
+    mdnDocs,
+    tags,
+  })
+    .then(() => {
+      res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log("blog update failed", err);
+    });
+});
+
+router.post("/blog/:id/delete", (req, res, next) => {
+  // Iteration #5: Delete the drone
+  // ... your code here
+  const { id } = req.params;
+  BlogModel.findByIdAndDelete(id)
+    .then(() => {
+      res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log("blog Delete failed", err);
+    });
+});
+
 //{tags : {$regex : "javascript"}}
 
 module.exports = router;
