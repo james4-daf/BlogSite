@@ -28,4 +28,34 @@ router.get("/blog/:id", (req, res, next) => {
     });
 });
 
+router.get("/blogs/create", (req, res, next) => {
+  BlogModel.create()
+    .then(() => {
+      res.render("blogs/newblogPost.hbs");
+      console.log("Blogs fetched", res);
+    })
+    .catch((err) => {
+      console.log("Blog create failed", err);
+    });
+});
+
+router.post("/blogs/create", (req, res, next) => {
+  const { title, problemStatement, solution, mdnDocs, tags } = req.body;
+  BlogModel.create({
+    title,
+    problemStatement,
+    solution,
+    mdnDocs,
+    tags,
+  })
+    .then(() => {
+      res.redirect("/blogs");
+    })
+    .catch((err) => {
+      console.log("blog creating failed", err);
+    });
+});
+
+//{tags : {$regex : "javascript"}}
+
 module.exports = router;

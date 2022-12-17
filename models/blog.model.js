@@ -8,6 +8,7 @@ const blogSchema = new Schema(
     solution: String,
     codeSnap: String,
     mdnDocs: [String],
+    tags: [String],
   },
 
   {
