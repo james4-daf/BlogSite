@@ -13,6 +13,36 @@ router.get("/blogs", (req, res, next) => {
     });
 });
 
+router.get("/arrays", (req, res, next) => {
+  BlogModel.find({ tags: { $regex: "(?i)a(?-i)rrays" } })
+    .then((arrayBlogs) => {
+      res.render("blogs/tags/arraysPosts.hbs", { arrayBlogs });
+    })
+    .catch((err) => {
+      console.log("blogs fetch failed", err);
+    });
+});
+
+router.get("/functions", (req, res, next) => {
+  BlogModel.find({ tags: { $regex: "(?i)f(?-i)unctions" } })
+    .then((functionBlogs) => {
+      res.render("blogs/tags/functionPosts.hbs", { functionBlogs });
+    })
+    .catch((err) => {
+      console.log("blogs fetch failed", err);
+    });
+});
+
+router.get("/strings", (req, res, next) => {
+  BlogModel.find({ tags: { $regex: "(?i)s(?-i)trings" } })
+    .then((stringsBlogs) => {
+      res.render("blogs/tags/stringsPosts.hbs", { stringsBlogs });
+    })
+    .catch((err) => {
+      console.log("blogs fetch failed", err);
+    });
+});
+
 //get each blog detail page
 
 router.get("/blog/:id", (req, res, next) => {
