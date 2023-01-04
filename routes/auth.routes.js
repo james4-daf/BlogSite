@@ -19,11 +19,17 @@ router.get("/signup", isLoggedOut, (req, res) => {
 });
 
 router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+  const { username, email, password } = req.body;
 
   if (!username) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Please provide your username.",
+    });
+  }
+
+  if (!email) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please provide your email.",
     });
   }
 
@@ -62,6 +68,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         // Create a user and save it in the database
         return User.create({
           username,
+          email,
           password: hashedPassword,
         });
       })
@@ -79,7 +86,10 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res
             .status(400)
-            .render("auth/signup", { errorMessage: "Username need to be unique. The username you chose is already in use." });
+            .render("auth/signup", {
+              errorMessage:
+                "Username need to be unique. The username you chose is already in use.",
+            });
         }
         return res
           .status(500)
@@ -106,7 +116,9 @@ router.post("/login", isLoggedOut, (req, res, next) => {
   if (password.length < 8) {
     return res
       .status(400)
-      .render("auth/login", { errorMessage: "Your password needs to be at least 8 characters long." });
+      .render("auth/login", {
+        errorMessage: "Your password needs to be at least 8 characters long.",
+      });
   }
 
   // Search the database for a user with the username submitted in the form
@@ -148,7 +160,7 @@ router.get("/logout", isLoggedIn, (req, res) => {
         .status(500)
         .render("auth/logout", { errorMessage: err.message });
     }
-    
+
     res.redirect("/");
   });
 });
