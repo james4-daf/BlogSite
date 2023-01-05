@@ -20,7 +20,12 @@ router.get("/:filter", (req, res, next) => {
 
   BlogModel.find({ tags: { $regex: capitalized } })
     .then((filteredBlog) => {
-      res.render("blogs/filterPosts.hbs", { filteredBlog });
+      res.render("blogs/filterPosts.hbs", {
+        filteredBlog,
+        isArray: filter == "arrays",
+        isFunctions: filter == "functions",
+        isString: filter == "strings",
+      });
       console.log("Blog fetched", res);
     })
     .catch((err) => {

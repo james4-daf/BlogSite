@@ -1,11 +1,15 @@
 <h2>Filtered Blogs</h2>
-<button class="selected">
+<button
+  {{#if isArray}}class="selected"{{/if}}
+>
   <a href="/arrays">Arrays</a>
 </button>
-<button>
+<button
+ {{#if isFunctions}}class="selected"{{/if}}>
   <a href="/functions">Functions</a>
 </button>
-<button>
+<button
+ {{#if isString}}class="selected"{{/if}}>
   <a href="/strings">Strings</a>
 </button>
 <div class="container">
