@@ -22,7 +22,28 @@ const capitalized = require("./utils/capitalized");
 const projectName = "Blog";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
+app.locals.loggedIn = false;
 
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+
+// Advanced usage
+app.use(
+  session({
+    secret: "keyboard cat",
+    saveUninitialized: false, // don't create session until something stored
+    resave: false,
+    cookie: {
+      maxAge: 14 * 24 * 60 * 60 * 1000,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI || "mongodb://0.0.0.0:27017/blog-site",
+      ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+    }),
+  })
+);
+
+//default cookie name 'connect.sid'
 // 👇 Start handling routes here
 
 const authRoutes = require("./routes/auth.routes");

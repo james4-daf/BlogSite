@@ -56,6 +56,8 @@ router.post("/login", (req, res) => {
       if (result) {
         const hash = result.password;
         if (bcrypt.compareSync(password, hash)) {
+          req.session.loggedInUser = result;
+          req.app.locals.loggedIn = true;
           res.redirect("/");
         } else {
           res.render("auth/login.hbs", { msg: "Password not matching" });
@@ -65,6 +67,20 @@ router.post("/login", (req, res) => {
       }
     })
     .catch((err) => {});
+});
+
+router.get("/profile", (req, res) => {
+  if (req.session.loggedInUser) {
+    res.render("blogs/profile.hbs");
+  } else {
+    res.redirect("login");
+  }
+});
+
+router.get("/logOut", (req, res) => {
+  req.app.locals.loggedIn = false;
+  req.session.destroy();
+  res.redirect("login");
 });
 // // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 // const saltRounds = 10;

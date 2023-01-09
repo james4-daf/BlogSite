@@ -18,21 +18,29 @@
           <a href="/blogs">Blogs</a>
           <span> | </span>
         </li>
-
         <li id="to-right">
-          <a href="/login">Log in</a>
+          <a href="/profile">Profile</a>
           <span> | </span>
         </li>
+        {{#if loggedIn}}
 
-        <li id="to-right">
-          <a href="/signup">Sign up</a>
-          <span> | </span>
-        </li>
+          <li id="to-right">
+            <a href="/logOut">Log out</a>
+            <span> | </span>
+          </li>
+        {{else}}
+          <li id="to-right">
+            <a href="/login">Log in</a>
+            <span> | </span>
+          </li>
 
-        <li id="to-right">
-          <a href="/">Log out</a>
-          <span> | </span>
-        </li>
+          <li id="to-right">
+            <a href="/signup">Sign up</a>
+            <span> | </span>
+          </li>
+
+        {{/if}}
+
       </ul>
     </nav>
     {{{body}}}
