@@ -2,6 +2,10 @@ const BlogModel = require("../../models/blog.model");
 
 const router = require("express").Router();
 
+router.get("/", (req, res) => {
+  res.render("index.hbs");
+});
+
 /* GET blogs  page, i.e. list of all blogs*/
 router.get("/blogs", (req, res, next) => {
   BlogModel.find()

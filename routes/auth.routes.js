@@ -5,20 +5,34 @@ const bcrypt = require("bcrypt");
 // // Require the User model in order to interact with the database
 const UserModel = require("../models/User.model");
 
-router.get("/login", (req, res) => {
-  res.render("auth/login.hbs");
-});
-
 router.get("/signup", (req, res) => {
   res.render("auth/signup.hbs");
 });
 
 router.post("/signup", (req, res) => {
   const { password, email, username } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
+  if (password == "" || email == "" || username == "") {
+    return res.render("auth/signup.hbs", {
+      msg: "Please enter all details",
+    });
+  }
+
+  const pasRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+  if (!pasRegex.test(password)) {
+    return res.render("auth/signup.hbs", {
+      msg: "Please enter a password with Min 1 uppercase letter \
+      Min 1 lowercase letter \
+      Min 1 special character \
+      Min 1 number \
+      Min 8 characters \
+      Max 30 characters.",
+    });
+  }
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-  console.log(hash);
+  //console.log(hash);
   UserModel.create({ username, email, password: hash })
     .then(() => {
       res.redirect("/login");
@@ -28,7 +42,30 @@ router.post("/signup", (req, res) => {
     });
 });
 // const mongoose = require("mongoose");
+router.get("/login", (req, res) => {
+  res.render("auth/login.hbs");
+});
 
+router.post("/login", (req, res) => {
+  //res.render("auth/login.hbs");
+
+  const { password, username } = req.body;
+  UserModel.findOne({ username })
+    .then((result) => {
+      console.log(result);
+      if (result) {
+        const hash = result.password;
+        if (bcrypt.compareSync(password, hash)) {
+          res.redirect("/");
+        } else {
+          res.render("auth/login.hbs", { msg: "Password not matching" });
+        }
+      } else {
+        res.render("auth/login.hbs", { msg: "Username not found" });
+      }
+    })
+    .catch((err) => {});
+});
 // // How many rounds should bcrypt run the salt (default [10 - 12 rounds])
 // const saltRounds = 10;
 

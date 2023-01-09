@@ -8,9 +8,9 @@
     <input type="password" name="password" />
   </label>
 
-  <button type="submit">Submit</button>
+  <button type="submit">Log In</button>
 </form>
 
-{{#if errorMessage}}
-  {{errorMessage}}
+{{#if msg}}
+  <p class="error">{{msg}}</p>
 {{/if}}
