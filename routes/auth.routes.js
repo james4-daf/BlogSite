@@ -58,6 +58,7 @@ router.post("/login", (req, res) => {
         if (bcrypt.compareSync(password, hash)) {
           req.session.loggedInUser = result;
           req.app.locals.loggedIn = true;
+          console.log("message here :    ", req.session);
           res.redirect("/");
         } else {
           res.render("auth/login.hbs", { msg: "Password not matching" });
@@ -70,6 +71,7 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
+  console.log("fdskfnsfnndslsdnl :    ", req.session);
   if (req.session.loggedInUser) {
     res.render("blogs/profile.hbs");
   } else {

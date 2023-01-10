@@ -71,6 +71,7 @@ router.post("/blogs/create", (req, res, next) => {
     solution,
     mdnDocs,
     tags,
+    userId: req.session.loggedInUser._id,
   })
     .then(() => {
       res.redirect("/blogs");
