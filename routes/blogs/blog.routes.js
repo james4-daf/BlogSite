@@ -1,5 +1,8 @@
 const BlogModel = require("../../models/blog.model");
 
+//cloudinary to hold images
+const fileUploader = require("../../config/cloudinary.config");
+
 const router = require("express").Router();
 
 const { authMiddleware } = require("../../middleware");
@@ -66,23 +69,29 @@ router.get("/blogs/create", authMiddleware, (req, res, next) => {
     });
 });
 
-router.post("/blogs/create", authMiddleware, (req, res, next) => {
-  const { title, problemStatement, solution, mdnDocs, tags } = req.body;
-  BlogModel.create({
-    title,
-    problemStatement,
-    solution,
-    mdnDocs,
-    tags,
-    userId: req.session.loggedInUser._id,
-  })
-    .then(() => {
-      res.redirect("/blogs");
+router.post(
+  "/blogs/create",
+  authMiddleware,
+  fileUploader.single("imageUrl"),
+  (req, res, next) => {
+    const { title, problemStatement, solution, mdnDocs, tags } = req.body;
+    BlogModel.create({
+      title,
+      problemStatement,
+      solution,
+      imageUrl: req.file.path,
+      mdnDocs,
+      tags,
+      userId: req.session.loggedInUser._id,
     })
-    .catch((err) => {
-      console.log("blog creating failed");
-    });
-});
+      .then(() => {
+        res.redirect("/blogs");
+      })
+      .catch((err) => {
+        console.log("blog creating failed");
+      });
+  }
+);
 
 router.get("/blog/:id/edit", authMiddleware, (req, res, next) => {
   const { id } = req.params;
@@ -95,23 +104,41 @@ router.get("/blog/:id/edit", authMiddleware, (req, res, next) => {
     });
 });
 
-router.post("/blog/:id/edit", authMiddleware, (req, res, next) => {
-  const { title, problemStatement, solution, mdnDocs, tags } = req.body;
-  const { id } = req.params;
-  BlogModel.findByIdAndUpdate(id, {
-    title,
-    problemStatement,
-    solution,
-    mdnDocs,
-    tags,
-  })
-    .then(() => {
-      res.redirect("/blogs");
-    })
-    .catch((err) => {
-      console.log("blog update failed", err);
-    });
-});
+router.post(
+  "/blog/:id/edit",
+  authMiddleware,
+  fileUploader.single("imageUrl"),
+  (req, res, next) => {
+    const { title, problemStatement, solution, existingImage, mdnDocs, tags } =
+      req.body;
+    const { id } = req.params;
+
+    let imageUrl;
+    if (req.file) {
+      imageUrl = req.file.path;
+    } else {
+      imageUrl = existingImage;
+    }
+    BlogModel.findByIdAndUpdate(
+      id,
+      {
+        title,
+        problemStatement,
+        solution,
+        imageUrl,
+        mdnDocs,
+        tags,
+      },
+      { new: true }
+    )
+      .then(() => {
+        res.redirect("/blogs");
+      })
+      .catch((err) => {
+        console.log("blog update failed", err);
+      });
+  }
+);
 
 router.post("/blog/:id/delete", authMiddleware, (req, res, next) => {
   // Iteration #5: Delete the drone

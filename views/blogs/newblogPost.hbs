@@ -1,6 +1,6 @@
 <h2>New Blog</h2>
 
-<form action="/blogs/create" method="post">
+<form action="/blogs/create" method="post" enctype="multipart/form-data">
   <div class="mb-3">
 
     <input placeholder="title" id="title" name="title" />
@@ -14,6 +14,18 @@
   </div>
   <div class="mb-3">
     <input placeholder="solution" id="solution" name="solution" />
+  </div>
+
+  <div class="mb-3">
+    <label>Code Snippet:
+
+      <input
+        type="file"
+        placeholder="Code Snippet"
+        id="imageUrl"
+        name="imageUrl"
+      />
+    </label>
   </div>
 
   <div class="mb-3">

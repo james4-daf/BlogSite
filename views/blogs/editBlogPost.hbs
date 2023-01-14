@@ -23,6 +23,20 @@
   </div>
 
   <div class="mb-3">
+    <label>Code Snippet:
+
+      <input type="file" id="imageUrl" name="imageUrl" />
+
+      <input
+        type="text"
+        name="existingImage"
+        hidden
+        value="{{blog.imageUrl}}"
+      />
+    </label>
+  </div>
+
+  <div class="mb-3">
     <input
       placeholder="mdnDocs"
       id="mdnDocs"
@@ -49,5 +63,5 @@
     </div>
   </fieldset>
 
-  <button type="submit">Submit</button>
+  <button type="submit">Save Changes</button>
 </form>
