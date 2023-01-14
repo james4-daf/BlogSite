@@ -22,7 +22,7 @@ const capitalized = require("./utils/capitalized");
 const projectName = "Blog";
 
 app.locals.appTitle = `${capitalized(projectName)}`;
-app.locals.loggedIn = false;
+// app.locals.loggedIn = false;
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo");

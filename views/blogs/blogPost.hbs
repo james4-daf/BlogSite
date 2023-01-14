@@ -6,11 +6,15 @@
 
   <a href="{{blog.mdnDocs}}">Mdn Docs</a>
   <p><b>Tags:</b> {{blog.tags}}</p>
-  <button>
-    <a href="/blog/{{blog._id}}/edit">Edit</a>
-  </button>
-  <form action="/blog/{{blog._id}}/delete" method="post">
 
-    <button type="submit" class="btn btn-warning">Delete blog</button>
-  </form>
+  {{#if blog.showButtons}}
+    <button>
+      <a href="/blog/{{blog._id}}/edit">Edit</a>
+    </button>
+    <form action="/blog/{{blog._id}}/delete" method="post">
+
+      <button type="submit" class="btn btn-warning">Delete blog</button>
+    </form>
+
+  {{/if}}
 </p>

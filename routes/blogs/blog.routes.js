@@ -2,6 +2,8 @@ const BlogModel = require("../../models/blog.model");
 
 const router = require("express").Router();
 
+const { authMiddleware } = require("../../middleware");
+
 router.get("/", (req, res) => {
   res.render("index.hbs");
 });
@@ -44,6 +46,7 @@ router.get("/blog/:id", (req, res, next) => {
   //console.log("errrrrrrrrrrrr" + id);
   BlogModel.findById(id.trim())
     .then((blog) => {
+      blog.showButtons = blog.userId == req.session.loggedInUser._id;
       res.render("blogs/blogPost.hbs", { blog });
       console.log("Blog fetched", res);
     })
@@ -52,7 +55,7 @@ router.get("/blog/:id", (req, res, next) => {
     });
 });
 
-router.get("/blogs/create", (req, res, next) => {
+router.get("/blogs/create", authMiddleware, (req, res, next) => {
   BlogModel.create()
     .then(() => {
       res.render("blogs/newblogPost.hbs");
@@ -63,7 +66,7 @@ router.get("/blogs/create", (req, res, next) => {
     });
 });
 
-router.post("/blogs/create", (req, res, next) => {
+router.post("/blogs/create", authMiddleware, (req, res, next) => {
   const { title, problemStatement, solution, mdnDocs, tags } = req.body;
   BlogModel.create({
     title,
@@ -77,11 +80,11 @@ router.post("/blogs/create", (req, res, next) => {
       res.redirect("/blogs");
     })
     .catch((err) => {
-      console.log("blog creating failed", err);
+      console.log("blog creating failed");
     });
 });
 
-router.get("/blog/:id/edit", (req, res, next) => {
+router.get("/blog/:id/edit", authMiddleware, (req, res, next) => {
   const { id } = req.params;
   BlogModel.findById(id)
     .then((blog) => {
@@ -92,7 +95,7 @@ router.get("/blog/:id/edit", (req, res, next) => {
     });
 });
 
-router.post("/blog/:id/edit", (req, res, next) => {
+router.post("/blog/:id/edit", authMiddleware, (req, res, next) => {
   const { title, problemStatement, solution, mdnDocs, tags } = req.body;
   const { id } = req.params;
   BlogModel.findByIdAndUpdate(id, {
@@ -110,7 +113,7 @@ router.post("/blog/:id/edit", (req, res, next) => {
     });
 });
 
-router.post("/blog/:id/delete", (req, res, next) => {
+router.post("/blog/:id/delete", authMiddleware, (req, res, next) => {
   // Iteration #5: Delete the drone
   // ... your code here
   const { id } = req.params;

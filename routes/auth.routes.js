@@ -4,6 +4,9 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 // // Require the User model in order to interact with the database
 const UserModel = require("../models/User.model");
+const BlogModel = require("../models/blog.model");
+
+const { authMiddleware } = require("../middleware");
 
 router.get("/signup", (req, res) => {
   res.render("auth/signup.hbs");
@@ -44,6 +47,7 @@ router.post("/signup", (req, res) => {
 // const mongoose = require("mongoose");
 router.get("/login", (req, res) => {
   res.render("auth/login.hbs");
+  
 });
 
 router.post("/login", (req, res) => {
@@ -70,13 +74,25 @@ router.post("/login", (req, res) => {
     .catch((err) => {});
 });
 
-router.get("/profile", (req, res) => {
-  console.log("fdskfnsfnndslsdnl :    ", req.session);
-  if (req.session.loggedInUser) {
-    res.render("blogs/profile.hbs");
-  } else {
-    res.redirect("login");
-  }
+//custome middlewares
+// const authMiddleware = (req, res, next) => {
+//   if (req.session.loggedInUser) {
+//     next();
+//   } else {
+//     res.redirect("login");
+//   }
+// };
+
+router.get("/profile", authMiddleware, (req, res) => {
+  //console.log("fdskfnsfnndslsdnl :    ", req.session);
+
+  BlogModel.find({ userId: req.session.loggedInUser._id })
+    .then((blogs) => {
+      res.render("blogs/profile.hbs", { blogs });
+    })
+    .catch((err) => {
+      console.log("blogs fetch failed", err);
+    });
 });
 
 router.get("/logOut", (req, res) => {
