@@ -49,7 +49,9 @@ router.get("/blog/:id", (req, res, next) => {
   //console.log("errrrrrrrrrrrr" + id);
   BlogModel.findById(id.trim())
     .then((blog) => {
-      blog.showButtons = blog.userId == req.session.loggedInUser._id;
+      if (req.app.locals.loggedIn == true) {
+        blog.showButtons = blog.userId == req.session.loggedInUser._id;
+      }
       res.render("blogs/blogPost.hbs", { blog });
       console.log("Blog fetched", res);
     })
