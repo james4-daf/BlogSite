@@ -1,21 +1,33 @@
 <h2>Filtered Blogs</h2>
-<button
-  {{#if isArray}}class="selected"{{/if}}
->
-  <a href="/arrays">Arrays</a>
-</button>
-<button
- {{#if isFunctions}}class="selected"{{/if}}>
-  <a href="/functions">Functions</a>
-</button>
-<button
- {{#if isString}}class="selected"{{/if}}>
-  <a href="/strings">Strings</a>
-</button>
+
+<div class="btn-group-wrap"> 
+
+
+  <div class="btn-group"> 
+
+<a
+  {{#if isArray}}class="btn btn-primary"{{else}} class="btn btn-outline-primary"{{/if}}
+
+   href="/arrays" >Arrays</a>
+
+<a 
+   {{#if isFunctions}}class="btn btn-primary"{{else}} class="btn btn-outline-primary"{{/if}}
+   href="/functions">Functions
+</a>
+<a
+   {{#if isString}}class="btn btn-primary"{{else}} class="btn btn-outline-primary"{{/if}}
+   href="/strings">Strings</a>
+</div>
+  </div>
+
 <div class="container">
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
 
   {{#each filteredBlog}}
-    <div class="center">
+    <div class="col">
+
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
 
       <h3>
         <a href="blog/{{_id}}">
@@ -26,6 +38,8 @@
       <h5>{{problemStatement}}</h5>
 
     </div>
-
+</div>
+        </div>
   {{/each}}
+</div>
 </div>

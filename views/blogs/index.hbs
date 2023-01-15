@@ -2,30 +2,41 @@
 <p>
   <a href="blogs/create">Add new blog</a>
 </p>
-<button>
-  <a href="/arrays">Arrays</a>
-</button>
-<button>
-  <a href="/functions">Functions</a>
-</button>
-<button>
-  <a href="/strings">Strings</a>
-</button>
+
+<div class="btn-group-wrap">
+
+  <div class="btn-group">
+
+    <a href="/arrays" class="btn btn-outline-primary">Arrays</a>
+
+    <a href="/functions" class="btn btn-outline-primary">Functions</a>
+
+    <a href="/strings" class="btn btn-outline-primary">Strings</a>
+
+  </div>
+</div>
 
 <div class="container">
 
-  {{#each blogs}}
-    <div class="center">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    {{#each blogs}}
+      <div class="col">
 
-      <h3>
-        <a href="blog/{{_id}}">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
 
-          {{title}}
-        </a>
-      </h3>
-      <h5>{{problemStatement}}</h5>
+            <h3>
+              <a href="blog/{{_id}}">
 
-    </div>
+                {{title}}
+              </a>
+            </h3>
+            <h5>{{problemStatement}}</h5>
 
-  {{/each}}
+          </div>
+        </div>
+
+      </div>
+    {{/each}}
+  </div>
 </div>
