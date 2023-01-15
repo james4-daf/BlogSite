@@ -15,6 +15,9 @@ router.get("/", (req, res) => {
 router.get("/blogs", (req, res, next) => {
   BlogModel.find()
     .then((blogs) => {
+      if (req.app.locals.loggedIn == true) {
+        blogs.showAddBlog = true;
+      }
       res.render("blogs/index.hbs", { blogs });
     })
     .catch((err) => {

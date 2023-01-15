@@ -1,20 +1,24 @@
-<h1>{{blog.title}}</h1>
-<p>{{blog.problemStatement}}</p>
-<p>{{blog.solution}}</p>
-<img src="{{blog.imageUrl}}" />
-<p>
+<div class="conainer">
 
-  <a href="{{blog.mdnDocs}}">Mdn Docs</a>
-  <p><b>Tags:</b> {{blog.tags}}</p>
+  <h1>{{blog.title}}</h1>
+  <p>{{blog.problemStatement}}</p>
+  <p>{{blog.solution}}</p>
+  <img src="{{blog.imageUrl}}" />
+  <p>
 
-  {{#if blog.showButtons}}
-    <button>
-      <a href="/blog/{{blog._id}}/edit">Edit</a>
-    </button>
-    <form action="/blog/{{blog._id}}/delete" method="post">
+    <a href="{{blog.mdnDocs}}">Mdn Docs</a>
+    <p><b>Tags:</b> {{blog.tags}}</p>
 
-      <button type="submit" class="btn btn-warning">Delete blog</button>
-    </form>
+    {{#if blog.showButtons}}
+      <button>
+        <a href="/blog/{{blog._id}}/edit">Edit</a>
+      </button>
+      <form action="/blog/{{blog._id}}/delete" method="post">
 
-  {{/if}}
-</p>
+        <button type="submit" class="btn btn-warning">Delete blog</button>
+      </form>
+
+    {{/if}}
+  </p>
+
+</div>

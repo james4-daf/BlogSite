@@ -1,9 +1,10 @@
 <h2>Blogs</h2>
-<p>
-  <a href="blogs/create">Add new blog</a>
-</p>
 
-<div class="btn-group-wrap">
+<div
+  class="btn-group-wrap"
+  role="toolbar"
+  aria-label="Toolbar with button groups"
+>
 
   <div class="btn-group">
 
@@ -14,6 +15,12 @@
     <a href="/strings" class="btn btn-outline-primary">Strings</a>
 
   </div>
+  {{#if blogs.showAddBlog}}
+    <div class="btn-group">
+
+      <a href="blogs/create" class="btn btn-success"> Add new blog</a>
+    </div>
+  {{/if}}
 </div>
 
 <div class="container">
