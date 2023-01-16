@@ -1,20 +1,49 @@
-<form action="/signup" method="POST">
-  <label>
-    Username
-    <input type="text" name="username" />
-  </label>
-  <label>
-    Email
-    <input type="email" name="email" />
-  </label>
-  <label>
-    Password
-    <input type="password" name="password" />
-  </label>
+<body class="text-center vsc-initialized">
 
-  <button type="submit">Submit</button>
-</form>
+  <main class="form-signin w-100 m-auto">
 
-{{#if msg}}
-  <p class="error">{{msg}}</p>
-{{/if}}
+    <form action="/signup" method="POST">
+      <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+            <div class="form-floating">
+
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          placeholder="username"
+        />
+        <label for="floatingUsername">Username</label>
+
+      </div>
+            <div class="form-floating">
+
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          placeholder="email"
+        />
+        <label for="floatingEmail">Email</label>
+
+     
+     <div class="form-floating">
+
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          placeholder="password"
+        />
+        <label for="floatingPassword">Password</label>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary submitBtn">Submit</button>
+    </form>
+
+    {{#if msg}}
+      <p class="error">{{msg}}</p>
+    {{/if}}
+
+  </main>
+</body>

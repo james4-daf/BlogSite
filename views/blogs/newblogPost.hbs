@@ -1,58 +1,98 @@
 <h2>New Blog</h2>
+<body class="vsc-initialized">
 
-<form action="/blogs/create" method="post" enctype="multipart/form-data">
-  <div class="mb-3">
+  <main class="form-signin w-100 m-auto">
+    <form action="/blogs/create" method="post" enctype="multipart/form-data">
+    <div class="card" style="background-color: aliceblue;">
 
-    <input placeholder="title" id="title" name="title" />
-  </div>
-  <div class="mb-3">
-    <input
-      placeholder="problemStatement"
-      id="problemStatement"
-      name="problemStatement"
-    />
-  </div>
-  <div class="mb-3">
-    <input placeholder="solution" id="solution" name="solution" />
-  </div>
+    
 
-  <div class="mb-3">
-    <label>Code Snippet:
+<div class="form-floating">
 
-      <input
-        type="file"
-        placeholder="Code Snippet"
-        id="imageUrl"
-        name="imageUrl"
-      />
-    </label>
-  </div>
+        <input
+          type="title"
+          name="title"
+          class="form-control"
+          placeholder="title"
+        />
+        <label for="floatingTitle">Title</label>
 
-  <div class="mb-3">
-    <input placeholder="mdnDocs" id="mdnDocs" name="mdnDocs" />
-  </div>
+      </div>
 
-  {{! <div class="mb-3">
+
+      <div class="form-floating">
+
+        <input
+          type="problemStatement"
+          name="problemStatement"
+          class="form-control"
+          placeholder="problemStatement"
+        />
+        <label for="floatingProblemStatement">Problem Statement</label>
+
+      </div>
+
+
+       <div class="form-floating">
+        <input
+          type="solution"
+          name="solution"
+          class="form-control"
+          placeholder="solution"
+        />
+        <label for="floatingSolution">Solution</label>
+
+      </div>
+      
+      <div class="mx-auto input-group mb-3">
+        <label>Code Snippet
+
+      <input type="file" class="form-control" placeholder="Code Snippet"
+            id="imageUrl"
+            name="imageUrl">
+        </label>
+
+    </div>
+
+  
+    <div class="form-floating">
+        <input
+          type="mdnDocs"
+          name="mdnDocs"
+          class="form-control"
+          placeholder="mdnDocs"
+        />
+        <label for="floatingmdnDocs">Mdn Docs</label>
+
+      </div>
+
+
+
+      {{! <div class="mb-3">
     <input placeholder="tags" id="tags" name="tags" />
   </div> }}
 
-  <fieldset>
-    <legend>Choose your blogs's tags:</legend>
+      <fieldset>
+        <legend>Choose your blogs's tags:</legend>
 
-    <div>
-      <input type="checkbox" id="Arrays" name="tags" value="Arrays" />
-      <label for="Arrays">Arrays</label>
-    </div>
+        <div>
+          <input type="checkbox" id="Arrays" name="tags" value="Arrays" />
+          <label for="Arrays">Arrays</label>
+        </div>
 
-    <div>
-      <input type="checkbox" id="Strings" name="tags" value="Strings" />
-      <label for="Strings">Strings</label>
-    </div>
-    <div>
-      <input type="checkbox" id="Functions" name="tags" value="Functions" />
-      <label for="Functions">Functions</label>
-    </div>
-  </fieldset>
+        <div>
+          <input type="checkbox" id="Strings" name="tags" value="Strings" />
+          <label for="Strings">Strings</label>
+        </div>
+        <div>
+          <input type="checkbox" id="Functions" name="tags" value="Functions" />
+          <label for="Functions">Functions</label>
+        </div>
+      </fieldset>
 
-  <button type="submit">Add</button>
-</form>
+            <button type="submit" class="btn btn-primary submitBtn">Add</button>
+    </form>
+
+    </div>
+  </main>
+</body>

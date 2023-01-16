@@ -6,8 +6,10 @@ a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
+h1,
+h2 {
+  text-align: center;
+  margin-top: 100px;
 }
 
 .btn-group-wrap {
@@ -19,6 +21,10 @@ h1 {
   background-color: #008cba;
 }
 
+.navbar {
+  padding: 20px;
+}
+
 .error {
   background: #f02b63;
   box-sizing: border-box;
@@ -26,4 +32,13 @@ h1 {
   margin: 20px auto;
   padding: 20px;
   width: 100%;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+}
+
+.submitBtn {
+  margin-top: 15px;
 }

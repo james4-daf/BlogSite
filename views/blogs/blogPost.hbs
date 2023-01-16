@@ -1,24 +1,30 @@
 <div class="conainer">
 
   <h1>{{blog.title}}</h1>
-  <p>{{blog.problemStatement}}</p>
-  <p>{{blog.solution}}</p>
-  <img src="{{blog.imageUrl}}" />
-  <p>
+  <div class="">
 
-    <a href="{{blog.mdnDocs}}">Mdn Docs</a>
-    <p><b>Tags:</b> {{blog.tags}}</p>
+    <div class="card mx-auto" style="width: 61%;">
 
-    {{#if blog.showButtons}}
-      <button>
-        <a href="/blog/{{blog._id}}/edit">Edit</a>
-      </button>
-      <form action="/blog/{{blog._id}}/delete" method="post">
+      <p>{{blog.problemStatement}}</p>
+      <p>{{blog.solution}}</p>
+      <img src="{{blog.imageUrl}}" />
+      <p>
 
-        <button type="submit" class="btn btn-warning">Delete blog</button>
-      </form>
+        <a href="{{blog.mdnDocs}}">Mdn Docs</a>
+        <p><b>Tags:</b> {{blog.tags}}</p>
 
-    {{/if}}
-  </p>
+        {{#if blog.showButtons}}
+          <button>
+            <a href="/blog/{{blog._id}}/edit">Edit</a>
+          </button>
+          <form action="/blog/{{blog._id}}/delete" method="post">
 
+            <button type="submit" class="btn btn-warning">Delete blog</button>
+          </form>
+
+        {{/if}}
+      </p>
+
+    </div>
+  </div>
 </div>
