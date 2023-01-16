@@ -1,67 +1,99 @@
 <h2>Edit Blog</h2>
 
-<form action="/blog/{{blog._id}}/edit" method="post">
-  <div class="mb-3">
+<body class="vsc-initialized">
 
-    <input placeholder="title" id="title" name="title" value="{{blog.title}}" />
-  </div>
-  <div class="mb-3">
-    <input
-      placeholder="problemStatement"
-      id="problemStatement"
-      name="problemStatement"
-      value="{{blog.problemStatement}}"
-    />
-  </div>
-  <div class="mb-3">
-    <input
-      placeholder="solution"
-      id="solution"
-      name="solution"
-      value="{{blog.solution}}"
-    />
-  </div>
+  <main class="form-signin w-100 m-auto">
 
-  <div class="mb-3">
-    <label>Code Snippet:
+    <form action="/blog/{{blog._id}}/edit" method="post">
+    <div class="card" style="background-color: aliceblue;">
 
-      <input type="file" id="imageUrl" name="imageUrl" />
+      <div class="form-floating">
 
-      <input
-        type="text"
-        name="existingImage"
-        hidden
-        value="{{blog.imageUrl}}"
-      />
-    </label>
-  </div>
+        <input
+          type="title"
+          name="title"
+          class="form-control"
+          placeholder="title"
+          value="{{blog.title}}"
+        />
+        <label for="floatingTitle">Title</label>
 
-  <div class="mb-3">
-    <input
-      placeholder="mdnDocs"
-      id="mdnDocs"
-      name="mdnDocs"
-      value="{{blog.mdnDocs}}"
-    />
-  </div>
+      </div>
 
-  <fieldset>
-    <legend>Choose your blogs's tags:</legend>
+         <div class="form-floating">
 
-    <div>
-      <input type="checkbox" id="Arrays" name="tags" value="Arrays" />
-      <label for="Arrays">Arrays</label>
+        <input
+          type="problemStatement"
+          name="problemStatement"
+          class="form-control"
+          placeholder="problemStatement"
+          value="{{blog.problemStatement}}"
+        />
+        <label for="floatingProblemStatement">Problem Statement</label>
+
+      </div>
+
+     
+     <div class="form-floating">
+        <input
+          type="solution"
+          name="solution"
+          class="form-control"
+          placeholder="solution"
+          value="{{blog.solution}}"
+        />
+        <label for="floatingSolution">Solution</label>
+
+      </div>
+
+      <div class="mb-3">
+        <label>Code Snippet:
+
+          <input type="file" class="form-control" placeholder="Code Snippet" id="imageUrl" name="imageUrl" />
+        </label>
+
+          <input
+            type="text"
+            name="existingImage"
+            hidden
+            value="{{blog.imageUrl}}"
+          />
+      </div>    
+
+       <div class="form-floating">
+        <input
+          type="mdnDocs"
+          name="mdnDocs"
+          class="form-control"
+          placeholder="mdnDocs"
+          value="{{blog.mdnDocs}}"
+        />
+        <label for="floatingmdnDocs">Mdn Docs</label>
+
+      </div>
+
+      <fieldset>
+        <legend>Choose your blogs's tags:</legend>
+
+        <div>
+          <input type="checkbox" id="Arrays" name="tags" value="Arrays" {{#if isArray}}checked{{/if}} />
+          <label for="Arrays">Arrays</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="Strings" name="tags" value="Strings" {{#if isString}}checked{{/if}}/>
+          <label for="Strings">Strings</label>
+        </div>
+        <div>
+          <input type="checkbox" id="Functions" name="tags" value="Functions" {{#if isFunctions}}checked{{/if}}/>
+          <label for="Functions">Functions</label>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="btn btn-primary submitBtn">Save Changes</button>
+    </form>
+
     </div>
+  </main>
 
-    <div>
-      <input type="checkbox" id="Strings" name="tags" value="Strings" />
-      <label for="Strings">Strings</label>
-    </div>
-    <div>
-      <input type="checkbox" id="Functions" name="tags" value="Functions" />
-      <label for="Functions">Functions</label>
-    </div>
-  </fieldset>
-
-  <button type="submit">Save Changes</button>
-</form>
+</body>

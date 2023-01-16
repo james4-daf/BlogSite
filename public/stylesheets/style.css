@@ -42,3 +42,8 @@ h2 {
 .submitBtn {
   margin-top: 15px;
 }
+
+.tags {
+  border: solid;
+  background: purple;
+}

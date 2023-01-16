@@ -102,7 +102,12 @@ router.get("/blog/:id/edit", authMiddleware, (req, res, next) => {
   const { id } = req.params;
   BlogModel.findById(id)
     .then((blog) => {
-      res.render("blogs/editBlogPost.hbs", { blog });
+      res.render("blogs/editBlogPost.hbs", {
+        blog,
+        isArray: blog.tags.includes("Arrays"),
+        isFunctions: blog.tags.includes("Functions"),
+        isString: blog.tags.includes("Strings"),
+      });
     })
     .catch((err) => {
       console.log("blog edit failed", err);
